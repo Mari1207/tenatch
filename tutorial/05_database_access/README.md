@@ -10,15 +10,21 @@ Windowsの場合は[こちら](https://www.postgresql.org/download/)を参考に
 PostgreSQLのコネクターを[こちら](https://jdbc.postgresql.org/download.html)からインストールしましょう。<br>
 バージョンは新しければ多分大丈夫です。
 
-1. Place the JDBC driver jar of the database you plan to use into $FIRECAT_HOME/lib/
+1. Place the JDBC driver jar of the database you plan to use into $FIRECAT_HOME/lib/ <br> (Windows users: please place the JDBC driver into $FIRECAT_HOME/sys/lib/)　
 2. Create a database called test_db.
 3. Create a table called test_tbl and populate with data.
-4. Create a file called db_test.nsp and put in the following lines:
+4. Create a file called db_test.nsp and put in the following lines: <br>
+
+```
 <%@page content_type="text/html; charset=ISO-8859-1"%>
 
 <%
-    var db = new Database("org.postgresql.Driver"); // change to the JDBC Driver you are using.
-    db.connect("jdbc:postgresql://127.0.0.1:5432/test_db", "postgres", "your_password"); // change the database username and password.
+    var db = new Database("org.postgresql.Driver");
+    // ^change to the JDBC Driver you are using.
+
+    db.connect("jdbc:postgresql://127.0.0.1:5432/test_db", "postgres", "your_password");
+    // ^change the database username and password.
+
     var result = db.executeRetrieval("SELECT * FROM test_tbl");
 
     while(result.next())
@@ -34,7 +40,7 @@ PostgreSQLのコネクターを[こちら](https://jdbc.postgresql.org/download.
 
     db.disconnect();
 %>
-
+```
 
 5. Test the page in your browser:
 If you created the file in $FIRECAT_HOME/WEBHOST/DEFAULT/WWWROOT,
